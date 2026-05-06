@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Page Header -->
+<div class="page-header-center">
+    <button class="date-toggle" id="dateToggleBtn">
+        <span id="dateToggleLabel">加载中...</span>
+        <span class="chevron" id="dateChevron">&#9660;</span>
+    </button>
+</div>
+
+<!-- Calendar Backdrop -->
+<div class="calendar-backdrop" id="calendarBackdrop"></div>
+
+<!-- Calendar Dropdown -->
+<div class="calendar-dropdown" id="calendarDropdown">
+    <div class="calendar-month-header">
+        <button class="calendar-month-nav" id="calPrevMonthBtn" aria-label="上个月">&#9664;</button>
+        <span class="month-label" id="calMonthLabel">2024年9月</span>
+        <button class="calendar-month-nav" id="calNextMonthBtn" aria-label="下个月">&#9654;</button>
+    </div>
+    <div class="calendar-weekday-row">
+        <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+    </div>
+    <div class="calendar-day-grid" id="calendarDayGrid"></div>
+</div>
+
+<!-- Task List -->
+<div class="task-list" id="taskList">
+    <div class="task-empty">
+        <div class="empty-icon">&#128203;</div>
+        <div class="empty-text">暂无任务</div>
+        <div class="empty-sub">点击下方按钮添加新任务</div>
+    </div>
+</div>
+
+<!-- Add Task Button -->
+<button class="add-task-btn" id="addTaskBtn">
+    <span class="plus-icon">+</span> 添加任务
+</button>
+
+<!-- Task Modal -->
+<div class="modal-overlay" id="taskModalOverlay">
+    <div class="modal-sheet modal-sheet-sm">
+        <div class="modal-handle"></div>
+        <div class="modal-header" id="taskModalTitle">添加任务</div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">任务名称</label>
+                <input type="text" class="form-input" id="taskTitleInput" placeholder="请输入任务名称" maxlength="100">
+            </div>
+            <div class="form-group">
+                <label class="form-label">优先级</label>
+                <div class="priority-selector" id="prioritySelector">
+                    <button class="priority-btn selected" data-priority="high">&#128308; 高</button>
+                    <button class="priority-btn" data-priority="medium">&#128993; 中</button>
+                    <button class="priority-btn" data-priority="low">&#128994; 低</button>
+                </div>
+            </div>
+            <input type="hidden" id="editTaskId" value="">
+        </div>
+        <div class="modal-footer">
+            <button class="btn-cancel" id="cancelTaskBtn">取消</button>
+            <button class="btn-primary" id="saveTaskBtn">保存</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

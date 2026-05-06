@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Courses Header -->
+<div class="courses-header">
+    <span class="today-label" id="todayDateLabel">2024年9月16日 周一</span>
+    <div class="week-selector-wrapper" id="weekSelectorBtn">
+        <span id="weekSelectorLabel">第1周</span>
+        <span class="week-chevron">&#9660;</span>
+    </div>
+    <button class="settings-gear-btn" id="settingsGearBtn" aria-label="设置">&#9881;</button>
+</div>
+
+<!-- Course Table -->
+<div class="course-table-wrapper">
+    <table class="course-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th id="dayHeader1">周一<span class="date-num" id="dateNum1"></span></th>
+                <th id="dayHeader2">周二<span class="date-num" id="dateNum2"></span></th>
+                <th id="dayHeader3">周三<span class="date-num" id="dateNum3"></span></th>
+                <th id="dayHeader4">周四<span class="date-num" id="dateNum4"></span></th>
+                <th id="dayHeader5">周五<span class="date-num" id="dateNum5"></span></th>
+                <th id="dayHeader6">周六<span class="date-num" id="dateNum6"></span></th>
+                <th id="dayHeader7">周日<span class="date-num" id="dateNum7"></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>08:00<br>09:40</td>
+                <td id="cell1_0"></td>
+                <td id="cell2_0"></td>
+                <td id="cell3_0"></td>
+                <td id="cell4_0"></td>
+                <td id="cell5_0"></td>
+                <td id="cell6_0"></td>
+                <td id="cell0_0"></td>
+            </tr>
+            <tr>
+                <td>10:00<br>11:40</td>
+                <td id="cell1_1"></td>
+                <td id="cell2_1"></td>
+                <td id="cell3_1"></td>
+                <td id="cell4_1"></td>
+                <td id="cell5_1"></td>
+                <td id="cell6_1"></td>
+                <td id="cell0_1"></td>
+            </tr>
+            <tr>
+                <td>12:30<br>14:10</td>
+                <td id="cell1_2"></td>
+                <td id="cell2_2"></td>
+                <td id="cell3_2"></td>
+                <td id="cell4_2"></td>
+                <td id="cell5_2"></td>
+                <td id="cell6_2"></td>
+                <td id="cell0_2"></td>
+            </tr>
+            <tr>
+                <td>14:30<br>16:10</td>
+                <td id="cell1_3"></td>
+                <td id="cell2_3"></td>
+                <td id="cell3_3"></td>
+                <td id="cell4_3"></td>
+                <td id="cell5_3"></td>
+                <td id="cell6_3"></td>
+                <td id="cell0_3"></td>
+            </tr>
+            <tr>
+                <td>16:30<br>18:10</td>
+                <td id="cell1_4"></td>
+                <td id="cell2_4"></td>
+                <td id="cell3_4"></td>
+                <td id="cell4_4"></td>
+                <td id="cell5_4"></td>
+                <td id="cell6_4"></td>
+                <td id="cell0_4"></td>
+            </tr>
+            <tr>
+                <td>19:30<br>21:10</td>
+                <td id="cell1_5"></td>
+                <td id="cell2_5"></td>
+                <td id="cell3_5"></td>
+                <td id="cell4_5"></td>
+                <td id="cell5_5"></td>
+                <td id="cell6_5"></td>
+                <td id="cell0_5"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Settings Panel -->
+<div class="settings-panel" id="settingsPanel">
+    <div class="settings-header">
+        <span>设置</span>
+        <button class="btn-cancel btn-small" id="closeSettingsBtn">关闭</button>
+    </div>
+    <div class="settings-body">
+        <div class="form-group">
+            <label class="form-label">学期开始日期（周一）</label>
+            <input type="date" class="form-input" id="semesterStartInput">
+        </div>
+        <button class="btn-primary" id="saveSemesterBtn" style="width:100%;">保存学期设置</button>
+        <div class="section-title">课程列表</div>
+        <div class="course-edit-list" id="courseEditList">
+            <div class="text-muted text-center" style="padding: 20px;">暂无课程，点击下方按钮添加</div>
+        </div>
+        <button class="add-task-btn" id="addCourseBtn" style="width:100%;margin:0;">
+            <span class="plus-icon">+</span> 添加课程
+        </button>
+    </div>
+</div>
+
+<!-- Course Edit Modal -->
+<div class="modal-overlay" id="courseModalOverlay">
+    <div class="modal-sheet">
+        <div class="modal-handle"></div>
+        <div class="modal-header" id="courseModalTitle">添加课程</div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">课程名称</label>
+                <input type="text" class="form-input" id="courseNameInput" placeholder="请输入课程名称" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label class="form-label">上课地点</label>
+                <input type="text" class="form-input" id="courseLocationInput" placeholder="例如：教学楼A201" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label class="form-label">星期</label>
+                <select class="form-select" id="courseDaySelect">
+                    <option value="1">周一</option>
+                    <option value="2">周二</option>
+                    <option value="3">周三</option>
+                    <option value="4">周四</option>
+                    <option value="5">周五</option>
+                    <option value="6">周六</option>
+                    <option value="7">周日</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">节次</label>
+                <select class="form-select" id="courseSlotSelect">
+                    <option value="0">第一节 08:00-09:40</option>
+                    <option value="1">第二节 10:00-11:40</option>
+                    <option value="2">第三节 12:30-14:10</option>
+                    <option value="3">第四节 14:30-16:10</option>
+                    <option value="4">第五节 16:30-18:10</option>
+                    <option value="5">第六节 19:30-21:10</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">周次（例如：1-16）</label>
+                <input type="text" class="form-input" id="courseWeeksInput" placeholder="1-16" maxlength="20">
+            </div>
+            <div class="form-group">
+                <label class="form-label">备注（可选）</label>
+                <input type="text" class="form-input" id="courseRemarkInput" placeholder="备注信息" maxlength="100">
+            </div>
+            <input type="hidden" id="editCourseId" value="">
+        </div>
+        <div class="modal-footer">
+            <button class="btn-danger-outline" id="deleteCourseBtn" style="display:none;">删除</button>
+            <button class="btn-cancel" id="cancelCourseBtn">取消</button>
+            <button class="btn-primary" id="saveCourseBtn">保存</button>
+        </div>
+    </div>
+</div>
+
+<!-- Week Picker Modal -->
+<div class="modal-overlay" id="weekPickerOverlay">
+    <div class="modal-sheet modal-sheet-sm">
+        <div class="modal-handle"></div>
+        <div class="modal-header">选择周次</div>
+        <div class="modal-body">
+            <div class="week-picker-grid" id="weekPickerGrid"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-cancel" id="cancelWeekPickerBtn" style="flex:1;">取消</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
