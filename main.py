@@ -25,12 +25,20 @@ if __name__ == "__main__":
     import uvicorn
 
     config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-    with open(config_path, "r", encoding="utf-8") as f:
-        config = json.load(f)
+    host = "0.0.0.0"
+    port = 8000
+    if os.path.exists(config_path):
+        with open(config_path, "r", encoding="utf-8") as f:
+            config = json.load(f)
+        host = config.get("host", host)
+        port = int(config.get("port", port))
+
+    # Render sets PORT env var, use it if available
+    port = int(os.environ.get("PORT", port))
 
     uvicorn.run(
         "main:app",
-        host=config.get("host", "0.0.0.0"),
-        port=config.get("port", 8000),
-        reload=True,
+        host=host,
+        port=port,
+        reload=False,
     )
